@@ -30,7 +30,7 @@ You get two distinct RAP applications, allowing you to master both modern ABAP d
 | Application Type | Focus Areas |
 | :--- | :--- |
 | 👨‍💻 **Unmanaged Application** | Core RAP principles, custom logic, handler methods, and full control over the transaction. |
-| 🤖 **Managed Application** | Framework power, late numbering, determinations, validations, and custom actions. |
+| 🤖 **Managed Application** | Draft enabled app, Late numbering, determinations, and custom actions. |
 
 <br/>
 
@@ -62,7 +62,7 @@ Have questions or want to learn more? Let's connect!
     <img src="https://img.shields.io/badge/Connect-on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin" alt="Connect on LinkedIn" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://sachinartani.com" target="_blank">
+  <a href="https://sachinartani.com/blog" target="_blank">
     <img src="https://img.shields.io/badge/Read-My%20Blog-orange?style=for-the-badge&logo=blogger" alt="Read My Blog" />
   </a>
 </div>
