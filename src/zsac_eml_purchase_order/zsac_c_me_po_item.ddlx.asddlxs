@@ -1,0 +1,170 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Purchase Order Item',
+    typeNamePlural: 'Purchase Order Items',
+    title: {
+      type: #STANDARD,
+      label: 'Item',
+      value: 'item_number'
+    },
+    description: {
+      value: 'material_number'
+    }
+  }
+}
+annotate view ZSAC_C_PO_ITEM with
+{
+  @UI.facet: [
+    {
+      id: 'ItemInfo',
+      type: #COLLECTION,
+      label: 'Item Information',
+      position: 10
+    },
+    {
+      id: 'ItemBasicData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'ItemInfo',
+      label: 'Item Basic Data',
+      targetQualifier: 'ItemBasicData',
+      position: 10
+    },
+    {
+      id: 'MaterialData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'ItemInfo',
+      label: 'Material Data',
+      targetQualifier: 'MaterialData',
+      position: 20
+    },
+    {
+      id: 'PricingData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'ItemInfo',
+      label: 'Pricing Data',
+      targetQualifier: 'PricingData',
+      position: 30
+    },
+    {
+      id: 'ItemAdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'ItemInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'ItemAdminData',
+      position: 40
+    },
+    {
+      id: 'AccountAssignments',
+      type: #LINEITEM_REFERENCE,
+      label: 'Account Assignments',
+      targetElement: '_PurchaseOrderAccount',
+      position: 20
+    },
+    {
+      id: 'History',
+      type: #LINEITEM_REFERENCE,
+      label: 'Purchase Order History',
+      targetElement: '_PurchaseOrderHistory',
+      position: 30
+    }
+  ]
+
+  @UI: {
+    lineItem: [{ position: 10, importance: #HIGH }],
+    identification: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'ItemBasicData', position: 10 }]
+  }
+  item_number;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'MaterialData', position: 10 }]
+  }
+  material_number;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #MEDIUM }],
+    identification: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'MaterialData', position: 20 }]
+  }
+  plant;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #HIGH }],
+    identification: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'MaterialData', position: 30 }]
+  }
+  quantity;
+
+  @UI: {
+    lineItem: [{ position: 50, importance: #MEDIUM }],
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'MaterialData', position: 40 }]
+  }
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'I_UnitOfMeasure',  element: 'UnitOfMeasure' } }]
+  unit_of_measure;
+
+  @UI: {
+    lineItem: [{ position: 60, importance: #HIGH }],
+    identification: [{ position: 60 }],
+    fieldGroup: [{ qualifier: 'PricingData', position: 10 }]
+  }
+  @EndUserText.label: 'Net Price'
+  net_price;
+
+  @UI: {
+    lineItem: [{ position: 70, importance: #HIGH }],
+    identification: [{ position: 70 }],
+    fieldGroup: [{ qualifier: 'PricingData', position: 20 }]
+  }
+  @EndUserText.label: 'Item Value'
+  item_value;
+
+  @UI: {
+    lineItem: [{ position: 80, importance: #MEDIUM }],
+    identification: [{ position: 80 }],
+    fieldGroup: [{ qualifier: 'ItemBasicData', position: 20 }]
+  }
+  delivery_date;
+
+  @UI: {
+    identification: [{ position: 100 }],
+    fieldGroup: [{ qualifier: 'ItemBasicData', position: 40 }]
+  }
+  item_text;
+
+  @UI: {
+    identification: [{ position: 110 }],
+    fieldGroup: [{ qualifier: 'ItemAdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 120 }],
+    fieldGroup: [{ qualifier: 'ItemAdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 130 }],
+    fieldGroup: [{ qualifier: 'ItemAdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 140 }],
+    fieldGroup: [{ qualifier: 'ItemAdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+
+  @UI.hidden: true
+  po_number;
+
+  @UI.hidden: true
+  currency;
+}

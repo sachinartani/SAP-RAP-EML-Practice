@@ -1,0 +1,8 @@
+@EndUserText.label: 'Purchase Order Service Definition'
+define service ZSAC_UI_PO_MANAGE {
+  expose ZSAC_C_PO_HEADER    as PurchaseOrderHeader;
+  expose ZSAC_C_PO_ITEM      as PurchaseOrderItem;
+  expose ZSAC_C_PO_ACCOUNT   as PurchaseOrderAccount;
+  expose ZSAC_C_PO_HISTORY   as PurchaseOrderHistory;
+  expose ZSAC_I_PO_STATUS_VH as POStatusVH;
+}

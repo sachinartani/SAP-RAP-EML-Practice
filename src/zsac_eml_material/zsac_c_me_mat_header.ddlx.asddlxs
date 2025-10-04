@@ -1,0 +1,122 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Material',
+    typeNamePlural: 'Materials',
+    title: {
+      type: #STANDARD,
+      label: 'Material',
+      value: 'material_number'
+    },
+    description: {
+      value: 'material_desc'
+    }
+  }
+}
+annotate view ZSAC_C_MAT_HEADER with
+{
+  @UI.facet: [
+    {
+      id: 'GeneralInfo',
+      type: #COLLECTION,
+      label: 'General Information',
+      position: 10
+    },
+    {
+      id: 'BasicData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Basic Data',
+      targetQualifier: 'BasicData',
+      position: 10
+    },
+    {
+      id: 'AdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'AdminData',
+      position: 20
+    },
+    {
+      id: 'PlantData',
+      type: #LINEITEM_REFERENCE,
+      label: 'Plant Data',
+      targetElement: '_MaterialPlant',
+      position: 20
+    }
+  ]
+
+  @UI: {
+    lineItem: [{ position: 10, importance: #HIGH }],
+    identification: [{ position: 10 }],
+    selectionField: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 10 }]
+  }
+  material_number;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    selectionField: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 20 }]
+  }
+  material_desc;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #MEDIUM }],
+    identification: [{ position: 30 }],
+    selectionField: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 30 }]
+  }
+  material_type;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #MEDIUM }],
+    identification: [{ position: 40 }],
+    selectionField: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 40 }]
+  }
+  material_group;
+
+  @UI: {
+    lineItem: [{ position: 50, importance: #MEDIUM }],
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 50 }]
+  }
+  base_unit;
+
+  @UI: {
+    lineItem: [{ position: 60, importance: #MEDIUM }],
+    identification: [{ position: 60 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 60 }]
+  }
+  industry_sector;
+
+  @UI: {
+    identification: [{ position: 70 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 80 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 90 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 100 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def for Material App'
+define service ZSAC_UI_MAT_MASTER_O4 {
+  expose ZSAC_C_MAT_HEADER as MaterialHeader;
+  expose ZSAC_C_MAT_PLANT  as MaterialPlant;
+}

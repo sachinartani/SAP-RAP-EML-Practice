@@ -1,0 +1,5 @@
+CLASS zsac_cl_bp_po_header DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsac_i_po_header.
+ENDCLASS.
+
+CLASS zsac_cl_bp_po_header IMPLEMENTATION.
+ENDCLASS.

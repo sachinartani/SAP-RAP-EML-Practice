@@ -1,0 +1,5 @@
+CLASS zsac_cl_bp_mat_header DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsac_i_mat_header.
+ENDCLASS.
+
+CLASS zsac_cl_bp_mat_header IMPLEMENTATION.
+ENDCLASS.

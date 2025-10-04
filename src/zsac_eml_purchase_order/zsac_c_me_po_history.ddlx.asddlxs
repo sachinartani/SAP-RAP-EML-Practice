@@ -1,0 +1,141 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Purchase History',
+    typeNamePlural: 'Purchase History',
+    title: {
+      type: #STANDARD,
+      label: 'History Entry',
+      value: 'history_number'
+    },
+    description: {
+      value: 'movement_type'
+    }
+  }
+}
+annotate view ZSAC_C_PO_HISTORY with
+{
+  @UI.facet: [
+    {
+      id: 'HistoryInfo',
+      type: #COLLECTION,
+      label: 'History Information',
+      position: 10
+    },
+    {
+      id: 'HistoryData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'HistoryInfo',
+      label: 'History Data',
+      targetQualifier: 'HistoryData',
+      position: 10
+    },
+    {
+      id: 'DocumentData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'HistoryInfo',
+      label: 'Document Data',
+      targetQualifier: 'DocumentData',
+      position: 20
+    },
+    {
+      id: 'HistoryAdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'HistoryInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'HistoryAdminData',
+      position: 30
+    }
+  ]
+
+  @UI: {
+    lineItem: [{ position: 10, importance: #HIGH }],
+    identification: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'HistoryData', position: 10 }]
+  }
+  @EndUserText.label: 'History Number'
+  history_number;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'DocumentData', position: 10 }]
+  }
+  document_number;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #HIGH }],
+    identification: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'HistoryData', position: 20 }]
+  }
+  @EndUserText.label: 'Movement Type'
+  movement_type;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #MEDIUM }],
+    identification: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'HistoryData', position: 30 }]
+  }
+  posting_date;
+
+  @UI: {
+    lineItem: [{ position: 50, importance: #HIGH }],
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'HistoryData', position: 40 }]
+  }
+  quantity;
+
+  @UI: {
+    lineItem: [{ position: 60, importance: #HIGH }],
+    identification: [{ position: 60 }],
+    fieldGroup: [{ qualifier: 'HistoryData', position: 50 }]
+  }
+  amount;
+
+  @UI: {
+    lineItem: [{ position: 70, importance: #MEDIUM }],
+    identification: [{ position: 70 }],
+    fieldGroup: [{ qualifier: 'DocumentData', position: 20 }]
+  }
+  @EndUserText.label: 'Reference Document'
+  reference_doc;
+
+  @UI: {
+    identification: [{ position: 80 }],
+    fieldGroup: [{ qualifier: 'HistoryAdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 90 }],
+    fieldGroup: [{ qualifier: 'HistoryAdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 100 }],
+    fieldGroup: [{ qualifier: 'HistoryAdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 110 }],
+    fieldGroup: [{ qualifier: 'HistoryAdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+
+  @UI.hidden: true
+  po_number;
+
+  @UI.hidden: true
+  item_number;
+
+  @UI.hidden: true
+  currency;
+
+  @UI.hidden: true
+  unit_of_measure;
+}

@@ -1,0 +1,190 @@
+managed implementation in class ZSAC_CL_BP_PO_HEADER unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSAC_I_PO_HEADER alias PurchaseOrderHeader
+persistent table zsac_po_header
+draft table ZSAC_PO_HEADER_D
+etag master locallastchangedat
+lock master total etag lastchangedat
+authorization master( global )
+late numbering
+{
+  field ( mandatory : create )
+   company_code, purch_organization, vendor_number, document_date;
+
+  field ( readonly )
+   po_number, po_status, createdby, createdat, lastchangedby, lastchangedat;
+
+  create;
+  update (features : instance);
+  delete (features : instance);
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  //Actions for status management
+  action (features : instance) approve result [1] $self;
+  action (features : instance) reject  result [1] $self;
+  action (features : instance) reset   result [1] $self;
+
+  determination setPoNumber on save { create; }
+  determination setInitialStatus on save { create; }
+
+  mapping for ZSAC_PO_HEADER
+  {
+    po_number = po_number;
+    company_code = company_code;
+    purch_organization = purch_organization;
+    vendor_number = vendor_number;
+    document_date = document_date;
+    currency = currency;
+    total_value = total_value;
+    po_status = po_status;
+    createdby = createdby;
+    createdat = createdat;
+    lastchangedby = lastchangedby;
+    lastchangedat = lastchangedat;
+    locallastchangedat = locallastchangedat;
+  }
+
+  association _PurchaseOrderItem { create (features : instance); with draft; }
+}
+
+define behavior for ZSAC_I_PO_ITEM alias PurchaseOrderItem
+persistent table zsac_po_item
+draft table ZSAC_PO_ITEM_D
+etag master locallastchangedat
+lock dependent by _PurchaseOrderHeader
+authorization dependent by _PurchaseOrderHeader
+late numbering
+{
+  field ( mandatory : create )
+   material_number, plant;
+
+  field ( readonly )
+   po_number, item_number, createdby, createdat, lastchangedby, lastchangedat;
+
+//  field ( readonly : update )
+//   po_number, item_number;
+
+  field ( features : instance ) currency;
+
+  update;
+  delete;
+
+  determination calculateItemValue on save { create; update; field quantity, net_price; }
+  determination setDeliveryDate on save { create; }
+
+  mapping for ZSAC_PO_ITEM
+  {
+    po_number = po_number;
+    item_number = item_number;
+    material_number = material_number;
+    plant = plant;
+    quantity = quantity;
+    unit_of_measure = unit_of_measure;
+    net_price = net_price;
+    item_value = item_value;
+    item_text = item_text;
+    delivery_date = delivery_date;
+    createdby = createdby;
+    createdat = createdat;
+    lastchangedby = lastchangedby;
+    lastchangedat = lastchangedat;
+    locallastchangedat = locallastchangedat;
+  }
+
+  association _PurchaseOrderHeader { with draft; }
+  association _PurchaseOrderAccount { create; with draft; }
+  association _PurchaseOrderHistory { create; with draft; }
+}
+
+define behavior for ZSAC_I_PO_ACCOUNT alias PurchaseOrderAccount
+persistent table zsac_po_account
+draft table ZSAC_PO_ACCT_D
+etag master locallastchangedat
+lock dependent by _PurchaseOrderHeader
+authorization dependent by _PurchaseOrderHeader
+late numbering
+{
+  field ( mandatory : create )
+   account_category;
+
+  field ( readonly )
+   po_number, item_number, assignment_number, createdby, createdat, lastchangedby, lastchangedat;
+
+  field ( features : instance ) currency;
+
+  update;
+  delete;
+
+  determination calculatePercentage on save { create; update; field assignment_value; }
+
+  mapping for ZSAC_PO_ACCOUNT
+  {
+    po_number = po_number;
+    item_number = item_number;
+    assignment_number = assignment_number;
+    account_category = account_category;
+    cost_center = cost_center;
+    gl_account = gl_account;
+    assignment_value = assignment_value;
+    percentage = percentage;
+    createdby = createdby;
+    createdat = createdat;
+    lastchangedby = lastchangedby;
+    lastchangedat = lastchangedat;
+    locallastchangedat = locallastchangedat;
+  }
+
+  association _PurchaseOrderItem { with draft; }
+  association _PurchaseOrderHeader { with draft; }
+}
+
+define behavior for ZSAC_I_PO_HISTORY alias PurchaseOrderHistory
+persistent table zsac_po_history
+draft table ZSAC_PO_HISTRY_D
+etag master locallastchangedat
+lock dependent by _PurchaseOrderHeader
+authorization dependent by _PurchaseOrderHeader
+late numbering
+{
+  field ( mandatory : create )
+   movement_type, posting_date;
+
+  field ( readonly )
+   po_number, item_number, history_number, createdby, createdat, lastchangedby, lastchangedat;
+
+  field ( readonly : update )
+   unit_of_measure;
+
+  field ( features : instance ) currency;
+
+  update;
+  delete;
+
+  mapping for ZSAC_PO_HISTORY
+  {
+    po_number = po_number;
+    item_number = item_number;
+    history_number = history_number;
+    document_number = document_number;
+    movement_type = movement_type;
+    posting_date = posting_date;
+    quantity = quantity;
+    amount = amount;
+    reference_doc = reference_doc;
+    createdby = createdby;
+    createdat = createdat;
+    lastchangedby = lastchangedby;
+    lastchangedat = lastchangedat;
+    locallastchangedat = locallastchangedat;
+  }
+
+  association _PurchaseOrderItem { with draft; }
+  association _PurchaseOrderHeader { with draft; }
+}

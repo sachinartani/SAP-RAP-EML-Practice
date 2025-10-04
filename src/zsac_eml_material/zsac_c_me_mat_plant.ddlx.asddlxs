@@ -1,0 +1,98 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Plant Data',
+    typeNamePlural: 'Plant Data',
+    title: {
+      type: #STANDARD,
+      label: 'Plant',
+      value: 'plant'
+    }
+  }
+}
+annotate view ZSAC_C_MAT_PLANT with
+{
+  @UI.facet: [
+    {
+      id: 'PlantInfo',
+      type: #COLLECTION,
+      label: 'Plant Information',
+      position: 10
+    },
+    {
+      id: 'PlantBasicData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'PlantInfo',
+      label: 'Plant Basic Data',
+      targetQualifier: 'PlantBasicData',
+      position: 10
+    },
+    {
+      id: 'PlantAdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'PlantInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'PlantAdminData',
+      position: 20
+    }
+  ]
+
+  @UI: {
+    lineItem: [{ position: 10, importance: #HIGH }],
+    identification: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'PlantBasicData', position: 10 }]
+  }
+  plant;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'PlantBasicData', position: 20 }]
+  }
+  procurement_type;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #MEDIUM }],
+    identification: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'PlantBasicData', position: 30 }]
+  }
+  mrp_controller;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #MEDIUM }],
+    identification: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'PlantBasicData', position: 40 }]
+  }
+  @EndUserText.label: 'Lot Size'
+  lot_size;
+
+  @UI: {
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'PlantAdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 60 }],
+    fieldGroup: [{ qualifier: 'PlantAdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 70 }],
+    fieldGroup: [{ qualifier: 'PlantAdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 80 }],
+    fieldGroup: [{ qualifier: 'PlantAdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+
+  @UI.hidden: true
+  material_number;
+}

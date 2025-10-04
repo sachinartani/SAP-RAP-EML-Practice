@@ -1,0 +1,131 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Account Assignment',
+    typeNamePlural: 'Account Assignments',
+    title: {
+      type: #STANDARD,
+      label: 'Assignment',
+      value: 'assignment_number'
+    },
+    description: {
+      value: 'cost_center'
+    }
+  }
+}
+annotate view ZSAC_C_PO_ACCOUNT with
+{
+  @UI.facet: [
+    {
+      id: 'AssignmentInfo',
+      type: #COLLECTION,
+      label: 'Assignment Information',
+      position: 10
+    },
+    {
+      id: 'AssignmentData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'AssignmentInfo',
+      label: 'Assignment Data',
+      targetQualifier: 'AssignmentData',
+      position: 10
+    },
+    {
+      id: 'AccountingData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'AssignmentInfo',
+      label: 'Accounting Data',
+      targetQualifier: 'AccountingData',
+      position: 20
+    },
+    {
+      id: 'AssignmentAdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'AssignmentInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'AssignmentAdminData',
+      position: 30
+    }
+  ]
+
+  @UI: {
+    lineItem: [{ position: 10, importance: #HIGH }],
+    identification: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'AssignmentData', position: 10 }]
+  }
+  @EndUserText.label: 'Assignment Number'
+  assignment_number;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'AssignmentData', position: 20 }]
+  }
+  account_category;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #HIGH }],
+    identification: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'AccountingData', position: 10 }]
+  }
+  cost_center;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #MEDIUM }],
+    identification: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'AccountingData', position: 20 }]
+  }
+  gl_account;
+
+  @UI: {
+    lineItem: [{ position: 50, importance: #HIGH }],
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'AssignmentData', position: 30 }]
+  }
+  @EndUserText.label: 'Assignment Value'
+  assignment_value;
+
+  @UI: {
+    lineItem: [{ position: 60, importance: #HIGH }],
+    identification: [{ position: 60 }],
+    fieldGroup: [{ qualifier: 'AssignmentData', position: 40 }]
+  }
+  @EndUserText.label: 'Percentage'
+  percentage;
+
+  @UI: {
+    identification: [{ position: 70 }],
+    fieldGroup: [{ qualifier: 'AssignmentAdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 80 }],
+    fieldGroup: [{ qualifier: 'AssignmentAdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 90 }],
+    fieldGroup: [{ qualifier: 'AssignmentAdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 100 }],
+    fieldGroup: [{ qualifier: 'AssignmentAdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+
+  @UI.hidden: true
+  po_number;
+
+  @UI.hidden: true
+  item_number;
+
+  @UI.hidden: true
+  currency;
+}

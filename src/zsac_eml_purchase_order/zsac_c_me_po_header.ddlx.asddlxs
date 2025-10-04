@@ -1,0 +1,163 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Purchase Order',
+    typeNamePlural: 'Purchase Orders',
+    title: {
+      type: #STANDARD,
+      label: 'Purchase Order',
+      value: 'po_number'
+    },
+    description: {
+      value: 'vendor_number'
+    }
+  }
+}
+annotate view ZSAC_C_PO_HEADER with
+{
+  @UI.facet: [
+    {
+      id: 'GeneralInfo',
+      type: #COLLECTION,
+      label: 'General Information',
+      position: 10
+    },
+    {
+      id: 'BasicData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Basic Data',
+      targetQualifier: 'BasicData',
+      position: 10
+    },
+    {
+      id: 'OrganizationalData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Organizational Data',
+      targetQualifier: 'OrganizationalData',
+      position: 20
+    },
+    {
+      id: 'AdminData',
+      type: #FIELDGROUP_REFERENCE,
+      parentId: 'GeneralInfo',
+      label: 'Administrative Data',
+      targetQualifier: 'AdminData',
+      position: 30
+    },
+    {
+      id: 'ItemsData',
+      type: #LINEITEM_REFERENCE,
+      label: 'Purchase Order Items',
+      targetElement: '_PurchaseOrderItem',
+      position: 20
+    }
+  ]
+
+  @UI: {
+    lineItem: [
+      { position: 10, importance: #HIGH },
+      // ✅ Add actions to lineItem (for mass actions from list)
+      { type: #FOR_ACTION, dataAction: 'approve', label: 'Approve', position: 1 },
+      { type: #FOR_ACTION, dataAction: 'reject', label: 'Reject', position: 2 },
+      { type: #FOR_ACTION, dataAction: 'reset', label: 'Reset', position: 3 }
+    ],
+    identification: [
+      { position: 10 },
+      // ✅ Add actions to identification (for single object actions)
+      { type: #FOR_ACTION, dataAction: 'approve', label: 'Approve', position: 1 },
+      { type: #FOR_ACTION, dataAction: 'reject', label: 'Reject', position: 2 },
+      { type: #FOR_ACTION, dataAction: 'reset', label: 'Reset', position: 3 }
+    ],
+    selectionField: [{ position: 10 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 10 }]
+  }
+  po_number;
+
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH }],
+    identification: [{ position: 20 }],
+    selectionField: [{ position: 20 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 20 }]
+  }
+  vendor_number;
+
+  @UI: {
+    lineItem: [{ position: 30, importance: #MEDIUM }],
+    identification: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 30 }]
+  }
+  document_date;
+
+  @UI: {
+    lineItem: [{ position: 40, importance: #MEDIUM }],
+    identification: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 40 }]
+  }
+  @Consumption.valueHelpDefinition: [{ entity: { element: 'Currency', name: 'I_Currency'  }  }]
+  currency;
+
+  @UI: {
+    lineItem: [{ position: 50, importance: #HIGH }],
+    identification: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 50 }]
+  }
+  @EndUserText.label: 'Total Value'
+  total_value;
+
+  @UI: {
+    lineItem: [
+      { position: 60, importance: #HIGH },
+      // ✅ Add criticality for status visualization
+      { position: 60, importance: #HIGH }
+    ],
+    identification: [{ position: 60 }],
+    selectionField: [{ position: 30 }],
+    fieldGroup: [{ qualifier: 'BasicData', position: 60 }]
+  }
+  @UI.textArrangement: #TEXT_LAST
+  @EndUserText.label: 'Status'
+  po_status;
+
+  @UI: {
+    identification: [{ position: 70 }],
+    selectionField: [{ position: 40 }],
+    fieldGroup: [{ qualifier: 'OrganizationalData', position: 10 }]
+  }
+  company_code;
+
+  @UI: {
+    identification: [{ position: 80 }],
+    selectionField: [{ position: 50 }],
+    fieldGroup: [{ qualifier: 'OrganizationalData', position: 20 }]
+  }
+  purch_organization;
+
+  @UI: {
+    identification: [{ position: 90 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 10 }]
+  }
+  createdby;
+
+  @UI: {
+    identification: [{ position: 100 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 20 }]
+  }
+  createdat;
+
+  @UI: {
+    identification: [{ position: 110 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 30 }]
+  }
+  lastchangedby;
+
+  @UI: {
+    identification: [{ position: 120 }],
+    fieldGroup: [{ qualifier: 'AdminData', position: 40 }]
+  }
+  lastchangedat;
+
+  @UI.hidden: true
+  locallastchangedat;
+}

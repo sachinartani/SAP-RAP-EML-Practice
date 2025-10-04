@@ -1,0 +1,80 @@
+unmanaged implementation in class ZSAC_CL_BP_MAT_HEADER unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSAC_I_MAT_HEADER alias MaterialHeader
+draft table zsac_mat_head_d
+etag master locallastchangedat
+lock master total etag lastchangedat
+authorization master ( global )
+
+{
+  field ( mandatory : create )
+  material_number;
+
+  field ( readonly )
+  createdby, createdat, lastchangedby, lastchangedat;
+
+  field ( readonly : update )
+  material_number;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zsac_mat_header
+    {
+      material_number    = material_number;
+      material_type      = material_type;
+      material_group     = material_group;
+      base_unit          = base_unit;
+      material_desc      = material_desc;
+      industry_sector    = industry_sector;
+      createdby          = createdby;
+      createdat          = createdat;
+      lastchangedby      = lastchangedby;
+      lastchangedat      = lastchangedat;
+      locallastchangedat = locallastchangedat;
+    }
+
+  association _MaterialPlant { create; with draft; }
+}
+
+define behavior for ZSAC_I_MAT_PLANT alias MaterialPlant
+draft table zsac_mat_plant_d
+etag master locallastchangedat
+lock dependent by _MaterialHeader
+authorization dependent by _MaterialHeader
+
+{
+  update;
+  delete;
+
+  field ( mandatory : create ) plant;
+
+  field ( readonly ) createdby, createdat, lastchangedby, lastchangedat;
+
+  field ( readonly : update ) material_number, plant;
+
+  mapping for zsac_mat_plant
+    {
+      material_number    = material_number;
+      plant              = plant;
+      procurement_type   = procurement_type;
+      mrp_controller     = mrp_controller;
+      lot_size           = lot_size;
+      createdby          = createdby;
+      createdat          = createdat;
+      lastchangedby      = lastchangedby;
+      lastchangedat      = lastchangedat;
+      locallastchangedat = locallastchangedat;
+    }
+
+  association _MaterialHeader { with draft; }
+}
