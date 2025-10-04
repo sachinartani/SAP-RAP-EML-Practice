@@ -58,7 +58,7 @@ Follow these simple steps to set up your practice lab:
 Have questions or want to learn more? Let's connect!
 
 <div align="center">
-  <a href="https://linkedin.com/in/sachin-artani" target="_blank">
+  <a style="text-decoration:none;" href="https://linkedin.com/in/sachin-artani" target="_blank">
     <img src="https://img.shields.io/badge/Connect-on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin" alt="Connect on LinkedIn" />
   </a>
   &nbsp;&nbsp;
